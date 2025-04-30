@@ -6,6 +6,7 @@
 package tela;
 
 import bd.BdAluno;
+import javax.swing.JOptionPane;
 import vo.Aluno;
 
 /**
@@ -40,6 +41,17 @@ public class TelaAluno extends javax.swing.JFrame {
         initComponents();
         bd = new BdAluno();
         setTitle("Formulário de Alunos");
+        tId.setEnabled(false);
+        tSerie.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char c = evt.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    evt.consume(); // impede a entrada
+                    JOptionPane.showMessageDialog(null, "Esse campo só aceita números");
+                }
+            }
+        });
+
     }
 
     private void telaToAluno() {
@@ -159,6 +171,7 @@ public class TelaAluno extends javax.swing.JFrame {
         telaToAluno();
         bd.salva(getAluno());
         this.dispose();
+
 
     }//GEN-LAST:event_bSalvarActionPerformed
 
